@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>postpallite</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>postpallite</h1>
+      <div class="balance-area">
+        <span class="balance-label">Portokasse</span>
+        <span id="balance">…</span>
+        <button class="icon-btn" id="refresh-balance" title="Refresh balance (re-authenticates)">↻</button>
+      </div>
+    </header>
+
+    <section>
+      <h2>New label</h2>
+      <form id="buy-form">
+        <label>
+          Recipient address
+          <textarea id="address" rows="7" placeholder="Kai Koch&#10;VH 2.OG&#10;Schlesische Str. 20&#10;10997 Berlin&#10;Germany" required></textarea>
+        </label>
+
+        <div id="product-grid" class="product-grid">
+          <div class="product-col">
+            <div class="product-col-header">Inland (DE)</div>
+            <div class="product-list" id="domestic-products"></div>
+          </div>
+          <div class="product-col">
+            <div class="product-col-header">International</div>
+            <div class="product-list" id="intl-products"></div>
+          </div>
+        </div>
+
+        <details>
+          <summary>Override sender / printer</summary>
+          <div class="detail-body">
+            <div class="row">
+              <label>Sender name<input id="sender-name" type="text" placeholder="Leave empty for default"></label>
+              <label>Sender company<input id="sender-company" type="text"></label>
+            </div>
+            <label>Street &amp; number<input id="sender-street" type="text"></label>
+            <div class="row">
+              <label>Postal code<input id="sender-zip" type="text"></label>
+              <label>City<input id="sender-city" type="text"></label>
+            </div>
+            <label>Country (DEU / AUT)<input id="sender-country" type="text" maxlength="3" placeholder="DEU"></label>
+            <label>PrintNode printer ID<input id="printer-override" type="text" placeholder="Leave empty for default"></label>
+          </div>
+        </details>
+
+        <div id="result"></div>
+
+        <button type="submit" class="primary-btn" id="buy-btn">Buy &amp; Print</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>History <span style="color:var(--nord3);font-weight:400;font-size:11px">(30 days)</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Recipient</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="history-body">
+          <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+        </tbody>
+      </table>
+      <p class="hint">Product catalog is configured in <code>config/products.yaml</code> on the server.</p>
+    </section>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
