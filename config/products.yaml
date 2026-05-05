@@ -1,0 +1,96 @@
+# Deutsche Post Internetmarke product catalog
+# Update prices roughly yearly (check deutschepost.de or run scripts/fetch-products.js)
+# price_cents must match Deutsche Post's current rates exactly — the API validates this
+
+products:
+  # Domestic
+  - id: "1"
+    name: "Standardbrief"
+    price_cents: 95
+    domestic: true
+
+#  - id: "1002"
+#    name: "Standardbrief Einschreiben Einwurf"
+#    price_cents: 330
+#    domestic: true
+
+#  - id: "1007"
+#    name: "Standardbrief Einschreiben"
+#    price_cents: 360
+#    domestic: true
+
+  - id: "11"
+    name: "Kompaktbrief"
+    price_cents: 110
+    domestic: true
+
+#  - id: "1012"
+#    name: "Kompaktbrief Einschreiben Einwurf"
+#    price_cents: 345
+#    domestic: true
+
+#  - id: "1017"
+#    name: "Kompaktbrief Einschreiben"
+#    price_cents: 375
+#    domestic: true
+
+  - id: "21"
+    name: "Großbrief"
+    price_cents: 180
+    domestic: true
+
+#  - id: "1022"
+#    name: "Großbrief Einschreiben Einwurf"
+#    price_cents: 415
+#    domestic: true
+
+# - id: "1027"
+#    name: "Großbrief Einschreiben"
+#    price_cents: 445
+#    domestic: true
+
+  - id: "31"
+    name: "Maxibrief"
+    price_cents: 290
+    domestic: true
+
+  # International
+  - id: "10001"
+    name: "Standardbrief Int."
+    price_cents: 125
+    domestic: false
+
+#  - id: "11006"
+#    name: "Standardbrief Int. Einschreiben"
+#    price_cents: 495
+#    domestic: false
+
+  - id: "10011"
+    name: "Kompaktbrief Int."
+    price_cents: 180
+    domestic: false
+
+#  - id: "11016"
+#    name: "Kompaktbrief Int. Einschreiben"
+#    price_cents: 550
+#    domestic: false
+
+  - id: "10051"
+    name: "Großbrief Int."
+    price_cents: 330
+    domestic: false
+
+#  - id: "11056"
+#    name: "Großbrief Int. Einschreiben"
+#    price_cents: 700
+#    domestic: false
+
+#  - id: "10071"
+#    name: "Maxibrief Int. 1Kg"
+#    price_cents: 650
+#    domestic: false
+
+#  - id: "11076"
+#    name: "Maxibrief Int. 1Kg R"
+#    price_cents: 1020
+#    domestic: false

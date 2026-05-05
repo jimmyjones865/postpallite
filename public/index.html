@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>postpallite</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>postpallite</h1>
+      <div class="balance-area">
+        <span class="balance-label">Portokasse</span>
+        <span id="balance">…</span>
+        <button class="icon-btn" id="refresh-balance" title="Refresh balance (re-authenticates)">↻</button>
+      </div>
+    </header>
+
+    <section>
+      <h2>Neues Postlabel</h2>
+      <form id="buy-form">
+        <label>
+          Empfänger
+          <textarea id="address" rows="7" placeholder="Max Mustermann&#10;Friedrichstr. 10&#10;10117 Berlin&#10;Deutschland" required></textarea>
+        </label>
+
+        <div id="product-grid" class="product-grid">
+          <div class="product-col">
+            <div class="product-col-header">Inland (DE)</div>
+            <div class="product-list" id="domestic-products"></div>
+          </div>
+          <div class="product-col">
+            <div class="product-col-header">International</div>
+            <div class="product-list" id="intl-products"></div>
+          </div>
+        </div>
+
+        <details>
+          <summary>Standard Absender / Drucker überschreiben</summary>
+          <div class="detail-body">
+            <div class="row">
+              <label>Absender Name<input id="sender-name" type="text" placeholder="Leer lassen für Standardeinstellungen"></label>
+              <label>Absender Firma<input id="sender-company" type="text"></label>
+            </div>
+            <label>Straße &amp; Hausnummer<input id="sender-street" type="text"></label>
+            <div class="row">
+              <label>PLZ<input id="sender-zip" type="text"></label>
+              <label>Stadt<input id="sender-city" type="text"></label>
+            </div>
+            <label>Land (DEU / AUT)<input id="sender-country" type="text" maxlength="3" placeholder="DEU"></label>
+            <label>PrintNode printer ID<input id="printer-override" type="text" placeholder="Leave empty for default"></label>
+          </div>
+        </details>
+
+        <div id="result"></div>
+
+        <button type="submit" class="primary-btn" id="buy-btn">Label kaufen &amp; drucken</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Historie <span style="color:var(--nord3);font-weight:400;font-size:11px">(30 Tage)</span></h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Empfänger</th>
+            <th>Produkt</th>
+            <th>Kosten</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="history-body">
+          <tr><td colspan="5" class="empty-state">Loading…</td></tr>
+        </tbody>
+      </table>
+      <p class="hint">Product catalog and prices are configured in <code>config/products.yaml</code> on the server.</p>
+    </section>
+
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
