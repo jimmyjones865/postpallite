@@ -104,7 +104,7 @@ label {
   flex-direction: column;
   gap: 5px;
   font-size: 12px;
-  color: var(--nord3);
+  color: var(--nord10);
   text-transform: uppercase;
   letter-spacing: 0.3px;
 }
@@ -209,7 +209,7 @@ td {
 tr:hover td { background: var(--nord2); }
 
 .recipient-name { color: var(--nord5); }
-.recipient-sub  { font-size: 11px; color: var(--nord3); }
+.recipient-sub  { color: var(--nord5); }
 
 .action-btn {
   background: none;
@@ -239,7 +239,7 @@ tr:hover td { background: var(--nord2); }
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.4px;
-  color: var(--nord3);
+  color: var(--nord10);
   font-weight: 600;
   margin-bottom: 6px;
 }
