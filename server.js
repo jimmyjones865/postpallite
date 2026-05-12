@@ -23,7 +23,7 @@ app.get('/api/config', (req, res) => {
   try {
     products = loadProducts();
   } catch (err) {
-    return res.status(500).json({ error: `Could not load products.yaml: ${err.message}` });
+    return res.status(500).json({ error: `Produktkatalog konnte nicht geladen werden: ${err.message}` });
   }
   res.json({
     products,
@@ -45,26 +45,26 @@ app.post('/api/labels', async (req, res) => {
   const { addressBlock, productId, senderOverride, printerId } = req.body;
 
   if (!addressBlock || !productId) {
-    return res.status(400).json({ error: 'addressBlock and productId are required' });
+    return res.status(400).json({ error: 'addressBlock und productId sind erforderlich' });
   }
 
   let products;
   try {
     products = loadProducts();
   } catch (err) {
-    return res.status(500).json({ error: `Could not load products.yaml: ${err.message}` });
+    return res.status(500).json({ error: `Produktkatalog konnte nicht geladen werden: ${err.message}` });
   }
 
   const product = products.find(p => String(p.id) === String(productId));
   if (!product) {
-    return res.status(400).json({ error: `Unknown product "${productId}"` });
+    return res.status(400).json({ error: `Unbekanntes Produkt „${productId}"` });
   }
 
   let recipient;
   try {
     recipient = parseAddress(addressBlock);
   } catch (err) {
-    return res.status(400).json({ error: `Address parse failed: ${err.message}` });
+    return res.status(400).json({ error: `Adresse konnte nicht verarbeitet werden: ${err.message}` });
   }
 
   const sender = senderOverride || {
@@ -96,7 +96,7 @@ app.post('/api/labels', async (req, res) => {
   try {
     pdfBuffer = await dp.downloadPdf(link);
   } catch (err) {
-    return res.status(502).json({ error: `Label was purchased but PDF download failed: ${err.message}` });
+    return res.status(502).json({ error: `Label wurde gekauft, aber PDF-Download fehlgeschlagen: ${err.message}` });
   }
 
   const effectivePrinterId = printerId || config.PRINTNODE_DEFAULT_PRINTER;
@@ -133,7 +133,7 @@ app.get('/api/labels', (req, res) => {
 
 app.post('/api/labels/:id/print', async (req, res) => {
   const label = db.getLabel(req.params.id);
-  if (!label) return res.status(404).json({ error: 'Label not found' });
+  if (!label) return res.status(404).json({ error: 'Label nicht gefunden' });
 
   const printerId = req.body.printerId || label.printer_id;
   try {
@@ -147,7 +147,7 @@ app.post('/api/labels/:id/print', async (req, res) => {
 
 app.get('/api/labels/:id/pdf', (req, res) => {
   const label = db.getLabel(req.params.id);
-  if (!label) return res.status(404).json({ error: 'Label not found' });
+  if (!label) return res.status(404).json({ error: 'Label nicht gefunden' });
 
   res.setHeader('Content-Type', 'application/pdf');
   res.setHeader('Content-Disposition', `attachment; filename="label-${label.id}.pdf"`);

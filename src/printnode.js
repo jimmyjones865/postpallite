@@ -22,7 +22,7 @@ async function print(printerId, pdfBuffer, title = 'Label') {
 
   const text = await res.text();
   if (!res.ok) {
-    throw new Error(`PrintNode error (HTTP ${res.status}): ${text}`);
+    throw new Error(`PrintNode-Fehler (HTTP ${res.status}): ${text}`);
   }
 
   return JSON.parse(text); // returns job ID (integer)

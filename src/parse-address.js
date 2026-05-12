@@ -1,17 +1,14 @@
-const COUNTRY_MAP = {
-  'germany': 'DEU', 'deutschland': 'DEU', 'de': 'DEU', 'deu': 'DEU',
-  'austria': 'AUT', 'österreich': 'AUT', 'oesterreich': 'AUT', 'at': 'AUT', 'aut': 'AUT',
-};
+const parseCountry = require('./parse-country');
 
 function parseAddress(block) {
   const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
 
   if (lines.length < 3) {
-    throw new Error(`need at least 3 lines (name, street, postal+city), got ${lines.length}`);
+    throw new Error(`Mindestens 3 Zeilen erforderlich (Name, Straße, PLZ+Ort), erhalten: ${lines.length}`);
   }
 
   const lastLine = lines[lines.length - 1];
-  const explicitCountry = COUNTRY_MAP[lastLine.toLowerCase()];
+  const explicitCountry = parseCountry(lastLine);
 
   let country, postalLineIdx;
   if (explicitCountry) {
@@ -20,7 +17,7 @@ function parseAddress(block) {
   } else {
     // No country line — last line must be a 5-digit German postal code
     if (!/^\d{5}\s+/.test(lastLine)) {
-      throw new Error(`no country line found, and last line "${lastLine}" is not a German postal code`);
+      throw new Error(`Keine Landeszeile gefunden, und letzte Zeile „${lastLine}" ist keine deutsche Postleitzahl`);
     }
     country = 'DEU';
     postalLineIdx = lines.length - 1;
@@ -29,18 +26,18 @@ function parseAddress(block) {
   const postalLine = lines[postalLineIdx];
   const postalMatch = postalLine.match(/^(\d{4,5})\s+(.+)$/);
   if (!postalMatch) {
-    throw new Error(`could not parse postal code and city from "${postalLine}"`);
+    throw new Error(`PLZ und Ort konnten nicht aus „${postalLine}" gelesen werden`);
   }
 
   if (postalLineIdx < 1) {
-    throw new Error('address too short — missing street line');
+    throw new Error('Adresse zu kurz – Straßenzeile fehlt');
   }
 
   const addressLine1 = lines[postalLineIdx - 1];
   const nameLines = lines.slice(0, postalLineIdx - 1);
 
   if (nameLines.length === 0) {
-    throw new Error('missing recipient name');
+    throw new Error('Empfängername fehlt');
   }
 
   return {

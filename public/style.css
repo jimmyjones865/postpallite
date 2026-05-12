@@ -291,3 +291,10 @@ tr:hover td { background: var(--nord2); }
   white-space: nowrap;
   flex-shrink: 0;
 }
+
+.fas-icon {
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  font-style: normal;
+  margin-right: 4px;
+}

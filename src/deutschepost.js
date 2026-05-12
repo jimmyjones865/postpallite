@@ -80,7 +80,7 @@ async function buyLabel(token, product, sender, recipient) {
 async function downloadPdf(link) {
   const res = await fetch(link);
   if (!res.ok) {
-    throw new Error(`PDF download failed (HTTP ${res.status})`);
+    throw new Error(`PDF-Download fehlgeschlagen (HTTP ${res.status})`);
   }
   return Buffer.from(await res.arrayBuffer());
 }
@@ -99,7 +99,7 @@ function cleanAddress(addr) {
 
 function formatDpError(status, body) {
   let parsed;
-  try { parsed = JSON.parse(body); } catch { return `Deutsche Post error (HTTP ${status}): ${body}`; }
+  try { parsed = JSON.parse(body); } catch { return `Deutsche Post Fehler (HTTP ${status}): ${body}`; }
 
   // Try common DP error shapes
   const message =
@@ -109,7 +109,7 @@ function formatDpError(status, body) {
     (parsed.errors && parsed.errors.map(e => e.message || e.detail || JSON.stringify(e)).join('; ')) ||
     JSON.stringify(parsed, null, 2);
 
-  return `Deutsche Post error (HTTP ${status}): ${message}`;
+  return `Deutsche Post Fehler (HTTP ${status}): ${message}`;
 }
 
 module.exports = { authenticate, buyLabel, downloadPdf };
