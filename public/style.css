@@ -1,3 +1,42 @@
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-style: normal;
+  src: url("/fonts/InterVariable.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100 900;
+  font-style: italic;
+  src: url("/fonts/InterVariable-Italic.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JuliaMono';
+  font-weight: 300;
+  src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono-webfonts/JuliaMono-Light.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JuliaMono';
+  font-weight: 400;
+  src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono-webfonts/JuliaMono-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JuliaMono';
+  font-weight: 500;
+  src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono-webfonts/JuliaMono-Medium.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JuliaMono';
+  font-weight: 700;
+  src: url("https://cdn.jsdelivr.net/gh/cormullion/juliamono-webfonts/JuliaMono-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+
 :root {
   --nord0: #2e3440;
   --nord1: #3b4252;
@@ -18,7 +57,7 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 14px;
   background: var(--nord0);
   color: var(--nord4);
@@ -124,6 +163,13 @@ textarea, input, select {
 textarea:focus, input:focus, select:focus { border-color: var(--nord8); }
 textarea { resize: vertical; min-height: 120px; line-height: 1.5; }
 select option { background: var(--nord1); }
+
+#address,
+#sender-street, #sender-zip, #sender-city, #sender-country, #printer-override {
+  font-family: 'JuliaMono', 'ui-monospace', monospace;
+}
+
+.recipient-sub { font-family: 'JuliaMono', 'ui-monospace', monospace; }
 
 .row {
   display: grid;
